@@ -13,6 +13,8 @@ namespace E_Procurement.Data.Repository
         //Subcategory GetSubcategoryById(int id);
         Subcategory GetSubcategoryById(int id);
 
+        IQueryable<Subcategory> GetSubcategoriesAsQueryable();
+
         void AddSubcategory(Subcategory subcategory);
         void UpdateSubcategory(Subcategory subcategory);
         void DeleteSubcategory (int id);

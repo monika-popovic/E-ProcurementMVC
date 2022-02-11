@@ -41,6 +41,14 @@ namespace E_Procurement.Data.Repository
                 .ToList();
         }
 
+        public IQueryable<Subcategory> GetSubcategoriesAsQueryable()
+        {
+            var subcategories = from c in _context.Subcategories.Include(c => c.Category)   
+                           select c;
+
+            return subcategories;
+        }
+
         public Subcategory GetSubcategoryById(int id)
         {
             return _context.Subcategories.FirstOrDefault(x => x.Id == id);

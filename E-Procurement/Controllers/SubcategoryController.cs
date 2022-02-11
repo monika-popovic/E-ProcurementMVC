@@ -1,8 +1,11 @@
 ﻿using E_Procurement.Data.Repository;
+using E_Procurement.Helpers;
 using E_Procurement.Models;
 using E_Procurement.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace E_Procurement.Controllers
 {
@@ -15,11 +18,20 @@ namespace E_Procurement.Controllers
             _repository = repository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
-            var subcategories = _repository.GetSubcategories();
+            //var subcategories = _repository.GetSubcategories();
             //return Ok(subcategories);
-            return View(subcategories);
+
+            var subcategories = _repository.GetSubcategoriesAsQueryable();
+
+            int pageSize = 3;
+            return View(await PaginatedListHelper<Subcategory>.CreateAsync(
+                subcategories.AsNoTracking(),
+                pageNumber ?? 1,
+                pageSize
+                ));
+            // return View(subcategories);
         }
 
         [HttpGet]
