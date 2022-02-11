@@ -1,0 +1,25 @@
+﻿@model SubcategoryViewModel
+
+@{
+}
+
+<form method="post" asp-controller="Subcategory" asp-action="Edit">
+    <input asp-for="Id" type="hidden" />
+    <div>
+        <label>Група</label>
+        <select class="form-select" aria-label="Default select example" asp-items="ViewBag.Categories" name="CategoryId">
+            @*<option selected>---</option>*@
+        </select>
+    </div>
+    <div class="mt-3 mb-3">
+        <label>Шифра</label>
+        <input asp-for="CPVCode" class="form-control" />
+    </div>
+    <div>
+        <label>Назив</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="d-grid mt-3 mb-3">
+        <input type="submit" value="Меморирај" class="btn btn-primary mt-3" />
+    </div>
+</form>
