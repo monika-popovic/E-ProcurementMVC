@@ -23,15 +23,13 @@ namespace E_Procurement.Controllers
             //var subcategories = _repository.GetSubcategories();
             //return Ok(subcategories);
 
-            ViewBag.Categories = new SelectList(_repository.GetCategories(), "Id", "Name");
-
             ViewData["CurrentFilter"] = searchString;
 
             var subcategories = _repository.GetSubcategoriesAsQueryable();
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                subcategories = subcategories.Where(x => x.Name == searchString);
+                subcategories = subcategories.Where(x => x.CPVCode == searchString);
             }
 
             if (!string.IsNullOrEmpty(searchString2))
