@@ -18,12 +18,26 @@ namespace E_Procurement.Controllers
             _repository = repository;
         }
 
-        public async Task<IActionResult> Index(int? pageNumber)
+        public async Task<IActionResult> Index(int? pageNumber, string searchString, string searchString2)
         {
             //var subcategories = _repository.GetSubcategories();
             //return Ok(subcategories);
 
+            ViewBag.Categories = new SelectList(_repository.GetCategories(), "Id", "Name");
+
+            ViewData["CurrentFilter"] = searchString;
+
             var subcategories = _repository.GetSubcategoriesAsQueryable();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                subcategories = subcategories.Where(x => x.Name == searchString);
+            }
+
+            if (!string.IsNullOrEmpty(searchString2))
+            {
+                subcategories = subcategories.Where(x => x.Category.Name == searchString2);
+            }
 
             int pageSize = 3;
             return View(await PaginatedListHelper<Subcategory>.CreateAsync(

@@ -11,6 +11,22 @@
 <a class="btn btn-primary mb-3 float-end mb-3"
    onclick="showInPopup('@Url.Action("Edit", "Subcategory", null, Context.Request.Scheme)', 'Додади лот')">Нов лот</a>
 
+<form asp-action="Index" method="get">
+    <div class="form-group">
+        Пребарување по:
+        *Лот : <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" class="col-6" />
+
+        @*<select asp-for="MovieGenre" asp-items="Model.Cat">
+            <option value="">All</option>
+        </select>*@
+
+        <div>
+            <input type="submit" value="Пребарај" class="btn btn-danger" />
+        </div>
+    </div>
+
+</form>
+
 <table class="table table-bordered">
     <thead class="thead-dark">
         <tr>
